@@ -129,7 +129,7 @@ class DataPreprocessor:
     def __init__(self):
         self.preprocessor = None
     
-    def fit(self, X_train):
+    def fit(self, X_train, y=None):
         # Identify feature types
         num_features = X_train.select_dtypes(include=["int64", "float64"]).columns
         cat_features = X_train.select_dtypes(include=["object", "category"]).columns
@@ -161,6 +161,22 @@ class DataPreprocessor:
             self.preprocessor.transform(X),
             columns=self.preprocessor.get_feature_names_out()
         )
+
+    def fit_transform(self, X, y=None):
+        return self.fit(X).transform(X)
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+class ManualFeatureSelector():
+    def __init__(self, selected_indices):
+        self.selected_indices = selected_indices
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        if hasattr(X, "iloc"):
+            return X.iloc[:, self.selected_indices]
+        else:
+            return X[:, self.selected_indices]
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Create a class for training and evaluating the baseline models
@@ -375,3 +391,4 @@ class ModelTraining:
         return self
 
 #--------------------------------------------------------------------------------------------------------------------------------------
+
