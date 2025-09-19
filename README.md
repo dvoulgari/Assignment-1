@@ -35,6 +35,8 @@ The project follows a structured workflow that includes:
 
 - `requirements.txt`: Lists all necessary Python dependencies.
 
+- `report.pdf`: Includes the analytical report of the assignment.
+
 ## How to use
 
 1) Clone the repository:
@@ -43,10 +45,12 @@ git clone https://github.com/dvoulgari/Assignment-1.git
 ```
 
 2) Navigate to the directory and install dependencies:
-
+```bash
 cd Assignment-1
 pip install -r requirements.txt
+```
 
 3) Launch the Jupyter Notebook to explore the code and project files:
-
+```bash
 jupyter notebook
+```
